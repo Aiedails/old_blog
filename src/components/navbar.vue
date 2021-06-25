@@ -6,8 +6,8 @@
       app
       dark
       class="primary"
-      :collapse="width < 960"
-      :class="width < 960 ? 'small' : ''"
+      :collapse="width < 1264"
+      :class="width < 1264 ? 'small' : ''"
       overflow-hidden
       shrink-on-scroll
       dense
@@ -22,16 +22,27 @@
         <v-img
           v-bind="props"
           gradient="to top right, rgba(255,205,210,.3), rgba(25,32,72,.7)"
-          @load="loading=true"
+          @load="loading = true"
         ></v-img>
       </template>
       <!-- The nav-drawer icon -->
       <v-app-bar-nav-icon
         @click.stop="drawer = !drawer"
-        v-show="width <= 960"
+        v-show="width <= 1264"
       ></v-app-bar-nav-icon>
       <!-- Home btn -->
-      <v-btn icon v-show="width <= 960">
+      <v-btn
+        icon
+        v-show="width <= 1264"
+        to="/"
+        @click="
+          $vuetify.goTo(0, {
+            duration: 400,
+            offset: 0,
+            easing: 'easeInQuad',
+          })
+        "
+      >
         <v-icon>mdi-home</v-icon>
       </v-btn>
 
@@ -42,11 +53,12 @@
       <template v-slot:extension>
         <v-btn plain to="/">HOME</v-btn>
         <v-btn plain to="/about">About</v-btn>
+        <v-btn plain to="/archives">Archives</v-btn>
       </template>
     </v-app-bar>
     <!-- mobile nav -->
     <v-navigation-drawer v-model="drawer" app temporary>
-      <v-container style="height: 25px; padding: 0"></v-container>
+      <v-container style="height: 9px; padding: 0"></v-container>
       <!-- used to take place of the igem bar -->
       <v-list-item link @click.stop="drawer = false">
         <v-icon>mdi-chevron-left</v-icon>
@@ -65,11 +77,53 @@
       <v-divider></v-divider>
       <!-- normal mobile nav-drawer. on-use now. -->
       <v-list dense>
-        <v-list-item link active-class="blue--text">
+        <v-list-item
+          to="/"
+          @click="
+            $vuetify.goTo(0, {
+              duration: 400,
+              offset: 0,
+              easing: 'easeInQuad',
+            })
+          "
+          active-class="red--text"
+        >
           <v-list-item-icon>
             <v-icon>mdi-home</v-icon>
           </v-list-item-icon>
           <v-list-item-title>HOME</v-list-item-title>
+        </v-list-item>
+        <v-list-item
+          to="/about"
+          @click="
+            $vuetify.goTo(0, {
+              duration: 400,
+              offset: 0,
+              easing: 'easeInQuad',
+            })
+          "
+          active-class="red--text"
+        >
+          <v-list-item-icon>
+            <v-icon>mdi-information-variant</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>About</v-list-item-title>
+        </v-list-item>
+        <v-list-item
+          to="/archives"
+          @click="
+            $vuetify.goTo(0, {
+              duration: 400,
+              offset: 0,
+              easing: 'easeInQuad',
+            })
+          "
+          active-class="red--text"
+        >
+          <v-list-item-icon>
+            <v-icon>mdi-archive</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>Archives</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -85,39 +139,6 @@ export default {
   data: () => ({
     loading: false,
     drawer: null,
-    /* for the v-treeview. Now abandon.
-    initiallyOpen: ["Team"],
-    nowact: ["Team"],
-    items: [
-      { name: "HOME" },
-      {
-        name: "Team",
-        href: "#",
-        children: [
-          { name: "Team", href: "#" },
-          { name: "Attributions", href: "#" },
-          { name: "Collaborations", href: "#" },
-        ],
-      },
-      {
-        name: "Project",
-        children: [
-          { name: "Communication", href: "#" },
-          { name: "Contribution", href: "#" },
-          { name: "Description", href: "#" },
-          { name: "Engineering", href: "#" },
-          { name: "Implementation", href: "#" },
-          { name: "Results" },
-        ],
-      },
-      {
-        name: "Parts",
-        children: [{ name: "Parts" }, { name: "Improve" }],
-      },
-      { name: "Safety" },
-      { name: "Human Practices" },
-    ],
-    */
   }),
 };
 </script>

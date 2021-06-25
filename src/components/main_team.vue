@@ -1,47 +1,139 @@
 <template>
-  <!-- disabled href="#..." in this components, because of bad experience. -->
-  <!-- The final solution is to use v-col to manage the page. which may be better -->
-  <v-row justify="center" style="margin: auto 40px">
-    <v-col cols="12" xs="12" sm="12" md="9" lg="9">
-      <!-- this is used to make sure the col won't move when screen reach xl.
-             by the test, the col will move "a col" left, so we use offset to eliminate it.
-             but notice that the col will still get wider on the right.
-        -->
-      <!-- This is a card for text. -->
-      <v-skeleton-loader
-        v-show="firstload"
-        type="image, article"
-      ></v-skeleton-loader>
-      <v-card
-        v-ripple="{ class: `error--text` }"
-        hover
-        id="description"
-        v-intersect="onIntersect"
-        v-scroll="updatepos"
-        v-show="!firstload"
-      >
-        <!-- This `v-intersect` is used to emit the signal "You can see me!" -->
-        <v-responsive :aspect-ratio="350 / 179">
-          <v-img src="@/assets/temp_sht.jpg">
+  <div style="padding: 0; margin: 0">
+    <v-skeleton-loader
+      v-show="firstload"
+      type="image, article"
+    ></v-skeleton-loader>
+    <v-card
+      v-ripple="{ class: `error--text` }"
+      hover
+      id="description"
+      v-intersect="onIntersect"
+      v-show="!firstload"
+    >
+      <!-- This `v-intersect` is used to emit the signal "You can see me!" -->
+      <v-img src="@/assets/home_page.jpg">
+        <template v-slot:placeholder>
+          <v-row class="fill-height ma-0" align="center" justify="center">
+            <v-progress-circular
+              indeterminate
+              color="grey lighten-5"
+            ></v-progress-circular>
+          </v-row>
+        </template>
+      </v-img>
+    </v-card>
+    <v-row style="margin-top: 16px">
+      <v-col cols="12" sm="6" md="6" lg="6">
+        <v-skeleton-loader
+          v-show="firstload"
+          type="image, article"
+        ></v-skeleton-loader>
+        <v-card
+          v-show="!firstload"
+          v-ripple="{ class: `error--text` }"
+          hover
+          to="/record/arch.log"
+          @click="
+            $vuetify.goTo(0, {
+              duration: 400,
+              offset: 0,
+              easing: 'easeInQuad',
+            })
+          "
+        >
+          <v-card-title>arch.log</v-card-title>
+          <v-card-subtitle style="padding-bottom: 0"
+            >A cheatsheet for my self</v-card-subtitle
+          >
+          <v-container class="chip_container">
+            <v-chip small outlined color="blue" class="chip">record</v-chip>
+            <v-chip small outlined color="orange" class="chip">updating</v-chip>
+          </v-container>
+          <v-container class="description_cont">
+            <v-card-text style="padding-top: 8; padding-left: 0"
+              >由于某种令人非常气恼的原因，被迫把装arch与恢复环境练习的非常熟练，不如借此机会记录一下</v-card-text
+            >
+          </v-container>
+        </v-card>
+      </v-col>
+      <v-col cols="12" sm="6" md="6" lg="6">
+        <v-skeleton-loader
+          v-show="firstload"
+          type="image, article"
+        ></v-skeleton-loader>
+        <v-card
+          v-show="!firstload"
+          v-ripple="{ class: `error--text` }"
+          hover
+          to="/record/igemwiki.log"
+          @click="
+            $vuetify.goTo(0, {
+              duration: 400,
+              offset: 0,
+              easing: 'easeInQuad',
+            })
+          "
+        >
+          <v-card-title>igemwiki.log</v-card-title>
+          <v-card-subtitle style="padding-bottom: 0"
+            >cheatsheet & something want to say</v-card-subtitle
+          >
+          <v-container class="chip_container">
+            <v-chip small outlined color="blue" class="chip">record</v-chip>
+            <v-chip small outlined color="orange" class="chip">updating</v-chip>
+          </v-container>
+          <v-container class="description_cont">
+            <v-card-text style="padding-top: 8; padding-left: 0"
+              >无论如何也算是自己做的第一个大项目以及第一个加入的大团队，希望能给自己留下一些有价值的东西</v-card-text
+            >
+          </v-container>
+        </v-card>
+      </v-col>
+      <v-col cols="12" sm="6" md="6" lg="6">
+        <v-skeleton-loader
+          v-show="firstload"
+          type="image, article"
+        ></v-skeleton-loader>
+        <v-card
+          v-show="!firstload"
+          v-ripple="{ class: `error--text` }"
+          hover
+          to="/essay/star"
+          @click="
+            $vuetify.goTo(0, {
+              duration: 400,
+              offset: 0,
+              easing: 'easeInQuad',
+            })
+          "
+        >
+          <v-img src="@/assets/neri.jpg">
             <template v-slot:placeholder>
-              <v-skeleton-loader type="image"></v-skeleton-loader>
+              <v-row class="fill-height ma-0" align="center" justify="center">
+                <v-progress-circular
+                  indeterminate
+                  color="grey lighten-5"
+                ></v-progress-circular>
+              </v-row>
             </template>
           </v-img>
-        </v-responsive>
-      </v-card>
-    </v-col>
-    <v-col cols="3" v-show="width >= 960">
-      <v-card v-ripple="{ class: `error--text` }" hover>
-        <v-responsive :aspect-ratio="1 / 1">
-          <v-img src="@/assets/logo.png">
-            <template v-slot:placeholder>
-              <v-skeleton-loader type="image"></v-skeleton-loader>
-            </template>
-          </v-img>
-        </v-responsive>
-        <v-card-title>Aiedail</v-card-title>
-      </v-card>
-    </v-col>
+          <v-card-title>爱，快乐，与活着</v-card-title>
+          <v-card-subtitle style="padding-bottom: 0"
+            >《星空列车与白的旅行》观后感</v-card-subtitle
+          >
+          <v-container class="chip_container">
+            <v-chip small outlined color="blue" class="chip">essay</v-chip>
+          </v-container>
+          <v-container class="description_cont">
+            <v-card-text style="padding-top: 8; padding-left: 0"
+              >“......我将踏上一段愉快的旅程。<br />与你一同的旅程......<br />无论何时......都与你一起......”</v-card-text
+            >
+          </v-container>
+        </v-card>
+      </v-col>
+    </v-row>
+    <!-- new artical add here -->
     <!-- The back-to btn, use the `istop` to judge show or not. -->
     <v-container>
       <v-fab-transition>
@@ -62,7 +154,7 @@
         </v-btn>
       </v-fab-transition>
     </v-container>
-  </v-row>
+  </div>
 </template>
 
 <script>
@@ -100,20 +192,11 @@ export default {
       console.log(this.isIntersecting);
       this.istop = this.isIntersecting;
     },
-    updatepos() {
-      var description = document.getElementById("description");
-      var despos = description.getBoundingClientRect().top;
-      if (despos >= 200) this.pos = 0;
-      else if (despos <= 200) this.pos = 1;
-      console.log(despos);
-    },
   },
   mounted() {
-    this.updatepos();
     setTimeout(() => {
       this.firstload = false;
-      console.log("loaded");
-    }, 1000);
+    }, 500);
   },
 };
 </script>
@@ -124,5 +207,28 @@ export default {
 }
 a {
   text-decoration: none;
+}
+.postcard {
+  margin-bottom: 35px;
+  font-family: "Ma Shan Zheng", cursive;
+}
+.ch {
+  font-family: FangSong;
+}
+#title {
+  font-size: 2rem;
+  font-family: "Ma Shan Zheng", cursive;
+  padding-top: 0;
+}
+.chip_container {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.chip {
+  margin: 0 4px;
+}
+.description_cont {
+  margin-left: 16px;
+  padding: 0 16px;
 }
 </style>

@@ -8,12 +8,12 @@
         text
         rounded
         class="my-2"
-        :href="link.href"
+        :to="link.to"
       >
         {{ link.name }}
       </v-btn>
       <v-col class="secondary py-4 text-center white--text" cols="12">
-        {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+        {{ new Date().getFullYear() }} — Powered by Aiedail
       </v-col>
     </v-row>
   </v-footer>
@@ -24,7 +24,9 @@ export default {
   name: "temfooter",
   data: () => ({
     links: [
-      { name: "Home", href: "#" },
+      { name: "Home", to: "/" },
+      { name: "About", to: "/about" },
+      { name: "Archives", to: "/archives" },
     ],
   }),
 };
